@@ -39,3 +39,12 @@
         src: /etc/nginx/nginx.conf
         dest: /maintain/nginx/nginx.conf
         state: link
+
+    # Add docker script to server
+    - name: add docker script
+      tags:
+        - docker
+      copy:
+        src: docker/website_docker.sh
+        dest: /maintain/docker/website_docker.sh
+        mode: 0755
