@@ -1,0 +1,41 @@
+---
+- hosts: pcbccit.services.brown.edu
+  remote_user: fgelin
+  become: true
+  become_user: root
+  become_method: sudo
+  become_flags: '-s'
+
+  tasks:
+    # Add certificate to nginx config
+    - name: add certbot to nginx
+      shell: certbot --nginx
+      tags:
+        - setup
+        - certbot
+
+    # Create directories and symlink to nginx.conf
+    - name: creates docker directory
+      tags:
+        - setup
+        - mkdir
+      file:
+        path: /maintain/docker
+        state: directory
+
+    - name: creates docker directory
+      tags:
+        - setup
+        - mkdir
+      file:
+        path: /maintain/nginx
+        state: directory
+
+    - name: symlink nginx.conf
+      tags:
+        - setup
+        - link
+      file:
+        src: /etc/nginx/nginx.conf
+        dest: /maintain/nginx/nginx.conf
+        state: link

@@ -1,0 +1,72 @@
+---
+- hosts: pcbccit.services.brown.edu
+  remote_user: fgelin
+  become: true
+  become_user: root
+  become_method: sudo
+  become_flags: '-s'
+
+  tasks:
+    ### Installation Steps
+
+    # Install NGINX
+    - name: set up nginx repo
+      tags:
+        - install
+      copy:
+        src: nginx.repo
+        dest: /etc/yum.repos.d/nginx.repo
+
+    - name: install nginx
+      tags:
+        - install
+      yum:
+        name: nginx
+        state: latest
+
+    # Install Docker
+    - name: set up docker repo
+      shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+      tags:
+        - install
+
+    - name: install docker-ce
+      yum:
+        name: docker-ce
+        state: latest
+      tags:
+        - install
+
+    - name: install docker-compose
+      shell: curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      tags:
+        - install
+
+    - name: apply exe permissions to docker-compose
+      shell: chmod +x /usr/local/bin/docker-compose
+      tags:
+        - install
+
+    - name: create symlink for docker-compose
+      shell: ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+      tags:
+        - install
+
+    # Install Certbot
+    - name: enable extras
+      shell: subscription-manager repos --enable "rhel-*-optional-rpms" --enable "rhel-*-extras-rpms"
+      tags:
+        - install
+
+    - name: install certbot
+      yum:
+        name: certbot
+        state: latest
+      tags:
+        - install
+
+    - name: install certbot-nginx client
+      yum:
+        name: python3-certbot-nginx
+      tags:
+        - install
