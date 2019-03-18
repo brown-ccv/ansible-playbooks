@@ -4,11 +4,16 @@
 Note: This set up is the same as `datasci.brown.edu` and `bcbi.brown.edu`.
 
 ### Generate a SSH Key
+To run Ansible Playbooks you must first generate a ssh key locally and add to the remote server.
+
+##### On your local machine:
+
+Generate the SSH key:
 ```
 ssh-keygen
 ```
 
-### Add key to remote server
+Add the key to the server:
 ```
 ssh-copy-id -i ~/.ssh/mykey user@pcbccit.services.brown.edu
 ```
