@@ -67,6 +67,6 @@
 
     - name: install certbot-nginx client
       yum:
-        name: python3-certbot-nginx
+        name: python2-certbot-nginx
       tags:
         - install
