@@ -1,6 +1,10 @@
 ## Ansible Playboooks for CBC server set-up
 ### Server name: `pcbccit.services.brown.edu`
 
+![Static Badge](https://img.shields.io/badge/ARCHIVED-red) 
+
+**This repo was archived February 2026, due to inactivity.**
+
 Note: This set up is the same as `datasci.brown.edu` and `bcbi.brown.edu`.
 
 ### Generate a SSH Key
