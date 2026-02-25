@@ -1,6 +1,7 @@
 ## Ansible Playboooks for CBC server set-up
  
 ![Static Badge](https://img.shields.io/badge/ARCHIVED-red)
+
 **This repo was archived February 2026, due to inactivity.**
 
 ### Server name: `pcbccit.services.brown.edu`
